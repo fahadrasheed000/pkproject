@@ -1,5 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>Home Page<h1>
+
+
+                <div class="links">
+                   <a href="{{config('app.app_url')}}">Home</a>
+                    <a href="{{config('app.app_url')}}about">About</a>
+                    <a href="{{config('app.app_url')}}services">Services</a>
+               
+                </div>
+                <center><h1>Home Page<h1></center>
+            
 @endsection
+            
