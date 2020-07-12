@@ -11,9 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/hello', function () {
-    return '<h1>HELLO WORD</h1>';
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+// Route::get('/hello', function () {
+//     return '<h1>HELLO WORD</h1>';
+// });
+// Route::get('/about', function () {
+//     return view('pages/about');
+// });
+// Route::get('/users/{id}', function ($id) {
+//     return $id;
+// });
+Route::get('/', 'PagesController@index');
+Route::get('/about', 'PagesController@about');
+Route::get('/services', 'PagesController@services');
