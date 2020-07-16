@@ -21,8 +21,10 @@ class PagesController extends Controller
     }
     public function services()
     {
+      
      $data=array();
      $data['title']="Services | LARAVEL";
+     $data['services']=['Web design','Web development','Mobile development'];
         return view('pages/services',$data);
     }
 }

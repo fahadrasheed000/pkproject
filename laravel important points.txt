@@ -73,6 +73,52 @@ So when you will call the other view like this
 @section('content')
 <h1>Services Page<h1>
 @endsection
+//===========================================================
+//=====using if and foreach you use in aprofessional way
+//==========================================================
+@if   
+
+@endif
+@foreach(#abc as $a)
+<li>{{$a}}</li>
+@endforeach
+to print the value use {{ }} Like type script
+//===============================================================
+//=important commands to install npm and laravel ui and auth view
+//===============================================================
+RUN COMMAND
+composer required laravel/ui  ----->to download bootstrap and basic ui in laravel
+php artisan ui vue --auth
+then it will ask to replace app.blade.php say yes it will create login and register functionality
+run npm install && npm rn dev
+to compile your assets
+
+//========================================================
+//========================MIRGRATION AND DATABASES========
+//========================================================
+Open the *env file
+First create php artisan make:controller PostController   (POST CONTROLLER)
+//======create model with migration to push in the data base later
+First create php artisan make:model Post -m   (POST Model)
+//---check database folder name of post migration add schema which will create table in the database
+
+ Schema::create('posts', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('title');
+            $table->mediumText('description');
+            $table->timestamps();
+        });
+	before migration open providers/AppServiceProviders
+
+Add line one lop and second in boot function
+use Illuminate\Support\Facades\Schema;
+   Schema::defaultStringLength(191);
+   NOW MIGRATE OUR TABLES
+   php artisan migrate
+
+	
+		
+		
 
 
 

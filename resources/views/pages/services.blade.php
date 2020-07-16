@@ -3,12 +3,16 @@
 @section('content')
 
 
-                <div class="links">
-                <a href="{{config('app.app_url')}}">Home</a>
-                    <a href="{{config('app.app_url')}}about">About</a>
-                    <a href="{{config('app.app_url')}}services">Services</a>
-               
-                </div>
                 <center><h1>Service Page<h1></center>
+                <ul>
+                @if(count($services)>0)
+@foreach($services as $service)
+<li>{{$service}}</li>
+@endforeach
+</ul>
+
+
+
+                @endif
             
 @endsection
