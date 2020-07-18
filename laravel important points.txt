@@ -98,6 +98,8 @@ to compile your assets
 //========================================================
 Open the *env file
 First create php artisan make:controller PostController   (POST CONTROLLER)
+//if you want to create controller with cruds functions use below command
+php artisan make:controller PostController --resource
 //======create model with migration to push in the data base later
 First create php artisan make:model Post -m   (POST Model)
 //---check database folder name of post migration add schema which will create table in the database
@@ -115,7 +117,30 @@ use Illuminate\Support\Facades\Schema;
    Schema::defaultStringLength(191);
    NOW MIGRATE OUR TABLES
    php artisan migrate
+ //==================================================================
+//========DIRECTLY WORK WITH DB AND MODEL USE (TINKER)==============
+//==================================================================== 
+php artisan tinker
+check entries in database
+App\Post::count();
 
+//==========
+	Let suppose you make a model post so for tiker command first make a instance
+	$post=new App\Post();
+	$post->title="First Title";
+	$post->description="First description";
+	$post->save();
+	it will create entry in database
+//================================CHECKING ROUTER IST WHICH U ARE USING
+php artisan route:list
+Now use the routes of controller the function s which you already created
+
+
+php artisan make:controller PostController --resource
+
+
+Now check list again it will show all functions of post controller in the routes
+php artisan route:list
 	
 		
 		
