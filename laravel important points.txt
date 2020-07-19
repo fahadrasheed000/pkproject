@@ -141,9 +141,86 @@ php artisan make:controller PostController --resource
 
 Now check list again it will show all functions of post controller in the routes
 php artisan route:list
-	
-		
-		
+//=====================================================================
+//============================QUERIES==================================
+//=====================================================================
+//=====================To write queries in POst controller==========
+first use App\Post;  incluse model in controller
+to get all data
+Post::all();
+to get data by sorting order
+Post::orderby('id','desc')->get();
+To find value from database
+Post::find($id)
+if you want to use your own custom query 
+simple include DB class like
+
+use DB;
+
+And then $post=DB::select("select * from posts order by id DESC");
+
+Post data like this
+//same like tinker
+$post=new Post();
+$post->title=$request->input('title');
+$post->description=$request->input('description');
+$post->save();
+   		
+//=======================================================================================
+//=======================USING FORMS you can use laravel collective packages
+//=====================================LARAVEL FORMS========================================
+
+composer require laravelcollective/html
+ you can form now using open close of form tag
+ {!! Form::open(['url' => 'foo/bar']) !!}
+    //
+{!! Form::close() !!}
+
+You can validate the form using
+   $this->validate($request,[
+'title'=>'required',
+'description'=>'required',
+
+   ]);
+   
+//================To show Error message in resources Views add folder inc
+add message.blade.php
+
+@if(count($errors)>0)
+@foreach($errors->all() as $error)
+<div class="alert alert-danger">
+{{$error}}
+</div>
+
+@endforeach
+@endif
+
+@if(session('success'))
+<div class="alert alert-success">
+{{session('success')}}
+</div>
 
 
+@endif
+
+@if(session('error'))
+<div class="alert alert-danger">
+{{session('error')}}
+</div>
+
+
+@endif
+
+include this message file in the main layout
+app.blade.php
+
+after contaiiner
+@include('inc.message')
+//----POST data like this
+//same like tinker
+$post=new Post();
+$post->title=$request->input('title');
+$post->description=$request->input('description');
+$post->save();
+   return redirect('{{config("app.url")}}post')->with('success','Post created successfully');
 
