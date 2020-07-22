@@ -18,7 +18,10 @@
 <li class="list-group-item">
 <h3><a href="{{config('app.url')}}post/{{$post->id}}">{{$post->title}}</a></h3>
 <small>{{date('D M, Y h:i A',strtotime($post->created_at))}}</small>
-<span class="pull-right"><a style="color:red" href="{{config('app.url')}}post/destroy/5">Delete</a></span>
+<hr>
+<span class="pull-right"><a style="color:red" href="{{config('app.url')}}post/{{$post->id}}/destroy/">Delete</a></span>&nbsp;
+<span class="pull-right"><a style="color:blue" href="{{config('app.url')}}post/{{$post->id}}/edit">Edit</a></span>
+
 </li>
 @endforeach
 </ul>

@@ -73,7 +73,8 @@ $post->save();
      */
     public function edit($id)
     {
-        //
+        $post=Post::find($id);
+        return view('post.edit')->with('posts',$post);
     }
 
     /**
@@ -85,7 +86,17 @@ $post->save();
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'title'=>'required',
+            'description'=>'required',
+            
+               ]);
+            //same like tinker
+            $post=Post::find($id);
+            $post->title=$request->input('title');
+            $post->description=$request->input('description');
+            $post->save();
+               return redirect('/post')->with('success','Post updated successfully');
     }
 
     /**
