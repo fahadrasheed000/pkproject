@@ -224,3 +224,8 @@ $post->description=$request->input('description');
 $post->save();
    return redirect('{{config("app.url")}}post')->with('success','Post created successfully');
 
+//======================FOR EDIT Update
+if you use resources then it creates automatically routes so you can call according to the routes define by LaravelCollective
+Like php artisan route:list
+will show list of Routes 
+Now for edit url URL/id/edit
