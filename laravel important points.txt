@@ -229,3 +229,15 @@ if you use resources then it creates automatically routes so you can call accord
 Like php artisan route:list
 will show list of Routes 
 Now for edit url URL/id/edit
+
+//==========================MAKE MIGRATION AND ROLLL BACK AND ROLL BACK STEPS
+making table like
+php artisan make:migration create_users_table --create=users
+
+if your table stucture want to change roll back
+php artisan migrate:rollback   ->return all migrations you can update migration file
+php artisan migrate:rolllback --step 2 ->return last two migrations
+
+you can update schema and run command
+php artisan migrate:reset
+//===========================================

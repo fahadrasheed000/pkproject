@@ -17,8 +17,6 @@
     <label for="exampleInputPassword1">Desctiption</label>
     <textarea  required="true" cols="12" rows="3" class="form-control" placeholder="Enter Description"  id="exampleInputPassword1" name="description">{{$posts->description}}</textarea>
   </div>
-  
-  {{-- {{FORM::hidden('_method','PUT')}} --}}
   <button type="submit" class="btn btn-primary">Submit</button> 
   <button type="submit" class="btn btn-danger pull-right">
   <a style="text-decoration:none;color:white" href="{{config('app.url')}}post">Cancel</a></button>

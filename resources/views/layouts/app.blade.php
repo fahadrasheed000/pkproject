@@ -39,10 +39,6 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        <li class="nav-item"><a class="nav-link" href="{{ config('app.url')}}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ config('app.url')}}about">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ config('app.url')}}services">Services</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ config('app.url')}}post">Posts</a></li>
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -76,8 +72,7 @@
             </div>
         </nav>
 
-        <main class="py-4 container">
-        @include('inc.message')
+        <main class="py-4">
             @yield('content')
         </main>
     </div>
