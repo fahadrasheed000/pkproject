@@ -11,9 +11,7 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
 // Route::get('/hello', function () {
 //     return '<h1>HELLO WORD</h1>';
 // });
@@ -23,19 +21,29 @@
 // Route::get('/users/{id}', function ($id) {
 //     return $id;
 // });
-Route::get('/', 'PagesController@index');
+// Route::get('/', 'PagesController@index');
+Route::get('/', function () {
+    return view('home');
+});
 Route::get('/about', 'PagesController@about');
 Route::get('/services', 'PagesController@services');
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::resource('/post', 'PostController');
+Route::get('tasks', 'TodoController@index')->name('tasks');
+Route::middleware(['todocheck'])->group(function () {
+    Route::get('todo/gettasks', 'TodoController@gettasks');
+    Route::post('todo/save', 'TodoController@save');
+    Route::get('todo/edit/{post}', 'TodoController@edit');
+    Route::post('todo/update', 'TodoController@update');
+    Route::get('todo/destroy/{post}', 'TodoController@destroy');
 
+ 
+});
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => ['auth','admin']], function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
+});
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');

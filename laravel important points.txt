@@ -240,4 +240,15 @@ php artisan migrate:rolllback --step 2 ->return last two migrations
 
 you can update schema and run command
 php artisan migrate:reset
-//===========================================
+//===================Make middle ware========================
+php artisan make:middleware AdminMiddleware
+step 2:write condition in function
+Step3 :register this middle ware in kernal.php and route middleware section
+step4:in Auth login controller you import facades/Auth
+Step5:write condition in function redirect to and define condition
+Step6:define middleware in routes with group option
+Route::group(['middleware'=>['auth','admin']]function(){
+
+});
+auth is the Laravel auth and admin is the middleware name which we registered in kernal
+
