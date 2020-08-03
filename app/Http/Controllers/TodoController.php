@@ -4,13 +4,33 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Todo;
+use DataTables;
 class TodoController extends Controller
 {
-    public function index()
-    {
-        return view('todo.index');
+  public function index(Request $request)
+  {
+      if ($request->ajax()) {
+          $data = Todo::orderby('id','DESC')->get();
+          return Datatables::of($data)
+                  ->addIndexColumn()
+                  ->addColumn('action', function($row){
+   
+                         $btn = '<button  type="button"  onclick="edit_task('.$row->id.')" title="Update Task"  rel="tooltip" title="Update Task" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
+                         <i class="now-ui-icons ui-2_settings-90"></i>
+                       </button>
+                           <button type="button"  rel="tooltip" title="Delete Task"  onclick="delete_task('.$row->id.')" class="btn btn-danger deleteTask  btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
+                             <i class="now-ui-icons ui-1_simple-remove"></i>
+                           </button';
+     
+                          return $btn;
+                  })
+                  
+                  ->rawColumns(['action'])
+                  ->make(true);
+      }
       
-    }
+      return view('todo.index');
+  }
     public function gettasks()
     {
         $tasks=Todo::orderby('id','Desc')->get();

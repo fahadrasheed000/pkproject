@@ -14,12 +14,17 @@ Admin | Todo List
       </div>
       <div class="card-body ">
         <div class="table-full-width table-responsive">
-          <table class="table">
-            <tbody id="todolist">
-     
-         
+          <table class="table table-bordered data-table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Name</th>
+                    <th width="100px">Action</th>
+                </tr>
+            </thead>
+            <tbody>
             </tbody>
-          </table>
+        </table>
         </div>
       </div>
       {{-- <div class="card-footer ">
@@ -36,6 +41,24 @@ Admin | Todo List
 @include('todo.ajax.edit');
 @endsection
 @section('scripts')
+   
+<script type="text/javascript">
+  var table;
+  $(function () {
+    
+  table = $('.data-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('tasks') }}",
+        columns: [
+            {data: 'id', name: 'id'},
+            {data: 'name', name: 'name'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+        ]
+    });
+    
+  });
+</script>
 <script type="text/javascript">
 function get_tasks()
 {
@@ -52,7 +75,7 @@ function get_tasks()
 }
 $(function(){
  
-  get_tasks();
+  //get_tasks();
 
 
   $('#add_task_form').submit(function(event) {
@@ -68,7 +91,8 @@ $.ajax({
 success: function(data){
   $("#add_task_form")[0].reset();
   $('#add_task').modal('hide');
-  get_tasks();
+  table.ajax.reload();
+  $('.modal-backdrop').remove()
                 }
 
               });
@@ -87,7 +111,8 @@ $.ajax({
 success: function(data){
   $("#update_task_form")[0].reset();
   $('#edit_task').modal('hide');
-  get_tasks();
+  table.ajax.reload();
+  $('.modal-backdrop').remove()
                 }
 
               });
@@ -107,7 +132,7 @@ $.ajax({
         "_token":$('meta[name="csrf-token"]').attr('content'),// method and token not needed in data
     },
  success: function(data){
-  get_tasks();
+  table.ajax.reload();
                 }
 });
   }

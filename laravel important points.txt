@@ -252,3 +252,52 @@ Route::group(['middleware'=>['auth','admin']]function(){
 });
 auth is the Laravel auth and admin is the middleware name which we registered in kernal
 
+//===================dYNAMIC DATATABLES==================
+to install datatable plugin use command
+composer require yajra/laravel-datatables-oracle
+after that define this in 
+config/app.php
+'providers' => [
+ ....
+ Yajra\Datatables\DatatablesServiceProvider::class,
+]
+'aliases' => [
+ ....
+ 'Datatables' => Yajra\Datatables\Facades\Datatables::class,
+]
+Define Use Datatable; in Controller and then define index function
+
+ public function index(Request $request)
+  {
+      if ($request->ajax()) {
+          $data = Todo::select('*');
+          return Datatables::of($data)
+                  ->addIndexColumn()
+                  ->addColumn('action', function($row){
+   
+                         $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+     
+                          return $btn;
+                  })
+                  ->rawColumns(['action'])
+                  ->make(true);
+      }
+      
+      return view('todo.index');
+  }
+  In view define this
+  <script type="text/javascript">
+  $(function () {
+    
+    var table = $('.data-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('tasks') }}",
+        columns: [
+            {data: 'id', name: 'id'},
+            {data: 'name', name: 'name'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+        ]
+    });
+    
+  });
